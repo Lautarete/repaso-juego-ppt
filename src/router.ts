@@ -60,26 +60,33 @@ export function goTo(path: string) {
   } else {
     window.history.pushState({}, "", basePath + path);
   }
-  if (isDeployed()) {
-    // quitar el basePath
-    const splitedPath = path.split("/");
-    path = "/" + splitedPath[splitedPath.length - 1];
-  }
+  // if (isDeployed()) {
+  //   // quitar el basePath
+  //   const splitedPath = path.split("/");
+  //   path = "/" + splitedPath[splitedPath.length - 1];
+  // }
+  // window.history.pushState({}, "", path);
   renderPath(path);
 }
 
 export function initRouter() {
   // inicia el router con la ruta inicial
   // arreglar el bug
-  let initialPath = window.location.pathname;
-
-  if (basePathRegex.test(initialPath)) {
-    console.log("se modifica el initalPath");
-
-    initialPath = basePath + "/welcome";
-  } else {
-    console.log("bug");
+  let initialPath = "/repaso-juego-ppt/welcome";
+  // let initialPath = window.location.pathname;
+  if (isDeployed()) {
+    initialPath = "/repaso-juego-ppt/";
   }
+
+  console.log(initialPath);
+
+  // if (basePathRegex.test(initialPath)) {
+  //   console.log("se modifica el initalPath");
+
+  //   initialPath = basePath + "/welcome";
+  // } else {
+  //   console.log("bug");
+  // }
 
   goTo(initialPath);
 }
